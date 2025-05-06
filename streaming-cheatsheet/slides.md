@@ -11,10 +11,16 @@ layout: default
 hideInToc: true
 title: 概要
 ---
-# 動画配信といっても考慮することは多い
-- 解像度は複数 or 単一
-- リソースの有無
-- 暗号化の有無
+# 概要
+
+Web動画配信を実装する際に知っておきたい主要なポイントを解説します：
+
+- 動画配信フォーマットの種類と選定基準
+- 要件に応じた実装アプローチ
+- MP4配信のメリットと実装時の注意点
+- HLSによるアダプティブストリーミングの実現方法
+- 動画コンテンツ保護のためのDRM概要
+
 ---
 layout: default
 hideInToc: true
@@ -147,7 +153,7 @@ flowchart TD
 ```
 ---
 layout: default
-title: DRM
+title: DRMについて
 ---
 
 # DRMについて
@@ -164,6 +170,23 @@ Googleが提供している[Widevine DRM](https://www.widevine.com/solutions/wid
 - Widevineパートナーになる
 - Widevineの利用を開始する
 - 動画を暗号化
+---
+layout: default
+title: まとめ
+---
+
+# まとめ
+
+- **配信フォーマットの選択**は要件に応じて適切に行う：
+  - シンプルな配信はMP4
+  - 複数解像度対応にはHLS/DASH
+  - コンテンツ保護にはDRM導入を検討
+
+- **MP4配信時**は「moovボックス」の位置に注意し、ファイル先頭配置を推奨
+
+- **HLS配信**はネットワーク状況に応じた最適な品質を提供可能
+
+- **DRM導入**は技術的ハードルが高いので、外部サービスを検討
 
 ---
 layout: end
