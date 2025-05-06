@@ -985,7 +985,7 @@
     codemirror-theme-vars "^0.1.2"
     prism-theme-vars "^0.2.4"
 
-"@slidev/types@51.6.0":
+"@slidev/types@51.6.0", "@slidev/types@^51.6.0":
   version "51.6.0"
   resolved "https://registry.yarnpkg.com/@slidev/types/-/types-51.6.0.tgz#b7d817b6ffe35a4fa593fa1142d37f6ce5807b43"
   integrity sha512-2qmxpbL6jXJuQMxpPhuVDnNPZzSNu9hIKMIU5tYhDT74vhiRRztsGmoYrh2sGOU84rQLpg6WQ4en4W01vCky9g==
