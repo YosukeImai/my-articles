@@ -2,7 +2,6 @@
 theme: seriph
 layout: section
 hideInToc: true
-css: style.css
 ---
 # VOD配信を実装するためのTips
 ## 今井陽介
@@ -12,19 +11,20 @@ hideInToc: true
 title: 概要
 ---
 # 概要
-
+<div class="h1-gradient">
 Web動画配信を実装する際に知っておきたい主要なポイントを解説します：
-
-- 動画配信フォーマットの種類と選定基準
-- 要件に応じた実装アプローチ
-- MP4配信のメリットと実装時の注意点
-- HLSによるアダプティブストリーミングの実現方法
-- 動画コンテンツ保護のためのDRM概要
+</div>
+<ul class="li-text">
+  <li>動画配信フォーマットの種類と選定基準</li>
+  <li>要件に応じた実装アプローチ</li>
+  <li>MP4配信のメリットと実装時の注意点</li>
+  <li>HLSによるアダプティブストリーミングの実現方法</li>
+  <li>動画コンテンツ保護のためのDRM概要</li>
+</ul>
 
 ---
 layout: default
 hideInToc: true
-css: style.css
 ---
 
 # 目次
@@ -37,26 +37,32 @@ title: 配信フォーマット
 ---
 
 # 配信フォーマット
-
+<div class="h1-gradient">
 Webサービスで動画配信する場合、いくつかフォーマットはありますが主にHLS,mp4, MPEG-DASHが主な選択肢になります。
-
+</div>
 
 ### **MP4（単一フォーマット）**
-単一ファイル形式であり、幅広いデバイスでサポートされている汎用的なフォーマットです。
+<ul class="li-text">
+  <li>単一ファイル形式であり、幅広いデバイスでサポートされている汎用的なフォーマットです。</li>
+</ul>
 <br>
 
 ### **HLS**
-HTTP Live Streaming。Appleが開発したストリーミング形式で、動画をセグメントに分割して配信します。
-
+<ul class="li-text">
+  <li>HTTP Live Streaming。Appleが開発したストリーミング形式で、動画をセグメントに分割して配信します。</li>
+</ul>
 <br>
 
 ### **MPEG-DASH**
-Dynamic Adaptive Streaming over HTTPの略。複数の品質でセグメント化された動画を配信する国際標準規格です。
+<ul class="li-text">
+  <li>Dynamic Adaptive Streaming over HTTPの略。複数の品質でセグメント化された動画を配信する国際標準規格です。</li>
+</ul>
 ---
 layout: default
 title: 要件別対応方針
 ---
 # 要件別の対応方針
+
 | 要件 | 対応方針 | 実装方法 |
 |------|---------|---------|
 | 動画を加工せず配信 | MP4をそのまま配信 | - GCSに保存<br>- CDNで配信 |
@@ -68,12 +74,16 @@ layout: default
 title: MP4の配信方法
 ---
 # MP4の配信方法
+<div class="h1-gradient">
 解像度について特別な要件がなければ、MP4の単一ファイルを配信する方法が適しています。
+</div>
 
 ### **HTTP Rangeリクエストを使用した配信**
-- Rangeリクエストとは、HTTPプロトコルの範囲指定機能で、ファイル全体ではなく特定のバイト範囲だけを取得するリクエストです。
-- 必要なデータのみを効率的に取得できるため、帯域幅の節約や高速再生が可能。
-- 動画の任意の位置（シーク位置）から再生を開始できる。
+<ul class="li-text">
+  <li>Rangeリクエストとは、HTTPプロトコルの範囲指定機能で、ファイル全体ではなく特定のバイト範囲だけを取得するリクエストです。</li>
+  <li>必要なデータのみを効率的に取得できるため、帯域幅の節約や高速再生が可能。</li>
+  <li>動画の任意の位置（シーク位置）から再生を開始できる。</li>
+</ul>
 
 ---
 layout: default
@@ -81,33 +91,43 @@ title: MP4のファイル構造と注意点
 ---
 ### **MP4ファイルの構造と配信の関係**
 MP4ファイルは、以下のような構造を持っています。
-1. **ftyp（File Type Box）**：ファイルタイプや互換性情報
-2. **moov（Movie Box）**：動画全体の構造やメタデータ
-3. **mdat（Media Data Box）**：実際の動画や音声データ
+<ol class="li-text">
+  <li><strong>ftyp（File Type Box）</strong>：ファイルタイプや互換性情報</li>
+  <li><strong>moov（Movie Box）</strong>：動画全体の構造やメタデータ</li>
+  <li><strong>mdat（Media Data Box）</strong>：実際の動画や音声データ</li>
+</ol>
 
 <br>
 
 ### **配信における注意点**
 **moovボックスの位置**
-- mdatボックスの後ろにある場合、最初にmoovを取得するために全ファイルをダウンロードする必要が生じ、再生の遅延が発生します。
-- moovの位置を先頭に移動させるために再度変換処理が必要です。
+<ul class="li-text">
+  <li>mdatボックスの後ろにある場合、最初にmoovを取得するために全ファイルをダウンロードする必要が生じ、再生の遅延が発生します。</li>
+  <li>moovの位置を先頭に移動させるために再度変換処理が必要です。</li>
+</ul>
 
 ---
 layout: default
 title: HLSの配信方法
 ---
 # HLSの配信方法
+<div class="h1-gradient">
 HLSはAdaptive Streamingを実現するためのストリーミングプロトコルです。
+</div>
 
 ### **セグメントベースのストリーミング**
-- 動画を短い時間（通常2〜10秒）のセグメントに分割し、各セグメントは個別のファイルとして配信されます。
-- マニフェストファイル（.m3u8）が全セグメントの場所と再生順序を管理します。
+<ul class="li-text">
+  <li>動画を短い時間（通常2〜10秒）のセグメントに分割し、各セグメントは個別のファイルとして配信されます。</li>
+  <li>マニフェストファイル（.m3u8）が全セグメントの場所と再生順序を管理します。</li>
+</ul>
 
 <br>
 
 ### **特徴として**
-- 異なる帯域幅に対応する複数の品質レベルを提供することが可能です。
-- クライアントは自動的にネットワーク状況に応じて最適な品質を選択できます。
+<ul class="li-text">
+  <li>異なる帯域幅に対応する複数の品質レベルを提供することが可能です。</li>
+  <li>クライアントは自動的にネットワーク状況に応じて最適な品質を選択できます。</li>
+</ul>
 
 ---
 layout: default
@@ -115,9 +135,11 @@ title: HLSのファイル構造と注意点
 ---
 ### **HLSの構造**
 HLSは、以下のようなファイル構造を持っています。
-- **マスタープレイリスト**: 利用可能な品質（解像度・ビットレート）のリスト
-- **メディアプレイリスト**: 各品質ストリームのセグメントリスト
-- **セグメントファイル**: 実際の動画データ（通常.tsまたは.fmp4形式）
+<ul class="li-text">
+  <li><strong>マスタープレイリスト</strong>: 利用可能な品質（解像度・ビットレート）のリスト</li>
+  <li><strong>メディアプレイリスト</strong>: 各品質ストリームのセグメントリスト</li>
+  <li><strong>セグメントファイル</strong>: 実際の動画データ（通常.tsまたは.fmp4形式）</li>
+</ul>
 <br><br>
 
 ```mermaid
@@ -155,9 +177,10 @@ title: DRMについて
 ---
 
 # DRMについて
-
+<div class="h1-gradient">
 よくある動画配信サービス（HuluやNetfrixなど）はDRM（デジタル保護管理）の技術を使っています。
 動画をダウンロードしたり、画面録画した場合でも黒塗りになるようDRM方式でデータを適切に暗号化しています。
+</div>
 
 ### **DRMサービス**
 一般的にはDRM認証サービスを導入します。
@@ -165,20 +188,27 @@ Googleが提供している[Widevine DRM](https://www.widevine.com/solutions/wid
 
 ### **導入方法として、**
 ざっくり下記手順が必要となり、かなりハードルが高いです。[参考URL](https://www.multidrmkit.net/blog/how-to-widevine)
-- Widevineパートナーになる
-- Widevineの利用を開始する
-- 動画を暗号化
+<ul class="li-text">
+  <li>Widevineパートナーになる</li>
+  <li>Widevineの利用を開始する</li>
+  <li>動画を暗号化</li>
+</ul>
 ---
 layout: default
 title: まとめ
 ---
 
 # まとめ
+<div class="h1-gradient">
+動画配信の実装方法まとめ
+</div>
 
 ### **配信フォーマットの選択**
-- シンプルな配信はMP4
-- 複数解像度対応にはHLS/DASH
-- コンテンツ保護にはDRM導入を検討
+<ul class="li-text">
+  <li>シンプルな配信はMP4</li>
+  <li>複数解像度対応にはHLS/DASH</li>
+  <li>コンテンツ保護にはDRM導入を検討</li>
+</ul>
 <br>
 
 ### **MP4配信時**
