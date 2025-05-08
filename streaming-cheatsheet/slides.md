@@ -45,13 +45,11 @@ Webサービスで動画配信する場合、いくつかフォーマットは�
 <ul class="li-text">
   <li>単一ファイル形式であり、幅広いデバイスでサポートされている汎用的なフォーマットです。</li>
 </ul>
-<br>
 
 ### **HLS**
 <ul class="li-text">
   <li>HTTP Live Streaming。Appleが開発したストリーミング形式で、動画をセグメントに分割して配信します。</li>
 </ul>
-<br>
 
 ### **MPEG-DASH**
 <ul class="li-text">
