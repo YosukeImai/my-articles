@@ -140,7 +140,7 @@ HLSは、以下のようなファイル構造を持っています。
   <li><strong>メディアプレイリスト</strong>: 各品質ストリームのセグメントリスト</li>
   <li><strong>セグメントファイル</strong>: 実際の動画データ（通常.tsまたは.fmp4形式）</li>
 </ul>
-<br><br>
+<br>
 
 ```mermaid
 flowchart TD
@@ -171,6 +171,7 @@ flowchart TD
         C4
     end
 ```
+
 ---
 layout: default
 title: DRMについて
@@ -179,7 +180,7 @@ title: DRMについて
 # DRMについて
 <div class="h1-gradient">
 よくある動画配信サービス（HuluやNetfrixなど）はDRM（デジタル保護管理）の技術を使っています。
-動画をダウンロードしたり、画面録画した場合でも黒塗りになるようDRM方式でデータを適切に暗号化しています。
+動画をダウンロードしたり、画面録画した場合でも黒塗りになるようDRM方式でデータを暗号化しています。
 </div>
 
 ### **DRMサービス**
@@ -199,9 +200,6 @@ title: まとめ
 ---
 
 # まとめ
-<div class="h1-gradient">
-動画配信の実装方法まとめ
-</div>
 
 ### **配信フォーマットの選択**
 <ul class="li-text">
