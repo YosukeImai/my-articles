@@ -3,7 +3,7 @@ title: "Web動画配信フォーマット選択とストリーミング実装ガ
 emoji: "�"
 type: "tech" # tech: 技術記事 / idea: アイデア
 topics: ["Web開発", "動画配信", "ストリーミング", "HLS", "MP4", "DRM"]
-published: false
+published: true
 ---
 
 # Web動画配信フォーマット選択とストリーミング実装ガイド
